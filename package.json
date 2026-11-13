@@ -1,25 +1,14 @@
 {
   "name": "matchmint",
-  "version": "0.1.0",
   "private": true,
+  "workspaces": ["apps/*"],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.29"
+    "dev": "concurrently -n api,web -c green,magenta \"npm run dev -w @matchmint/api\" \"npm run dev -w @matchmint/web\"",
+    "dev:web": "npm run dev -w @matchmint/web",
+    "dev:api": "npm run dev -w @matchmint/api",
+    "build": "npm run build -w @matchmint/api && npm run build -w @matchmint/web"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.29",
-    "@eslint/eslintrc": "^3"
+    "concurrently": "^9.1.0"
   }
 }

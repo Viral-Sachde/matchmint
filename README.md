@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MatchMint
 
-## Getting Started
+A marketplace where people and organisations who need backing (NGOs, fests, creators, communities, events, young companies) meet the brands, funds and CSR teams who want to back them.
 
-First, run the development server:
+## Run it
 
-```bash
+```
+npm install
+cp apps/api/.env.example apps/api/.env   # then set JWT_SECRET and DEMO_PASSWORD
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Web (Next.js): http://localhost:3000
+- API (NestJS): http://localhost:4000/api
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Layout
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+apps/web   Next.js 15 app: marketing site and the product
+apps/api   NestJS 11 API with SQLite (file at apps/api/data/matchmint.db)
+```
 
-## Learn More
+Marketing pages: `/`, `/how-it-works` (interactive demo), `/about`, `/seekers`, `/backers`, `/contact`, `/logos`
+Product pages: `/explore`, `/posts/[id]`, `/posts/new`, `/dashboard`, `/login`, `/signup`
 
-To learn more about Next.js, take a look at the following resources:
+## How matching works
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- A **Seeking** post comes from someone who needs backing. An **Offering** post comes from someone who has backing to give.
+- Either kind receives **proposals**: an amount and a short message.
+- The post owner accepts or declines each proposal. On an Offering post that is the payer choosing who to fund. On a Seeking post, the proposal is the payer's yes and the seeker accepts the one they want.
+- Contact details are shared only after a proposal is accepted.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Demo data
 
-## Deploy on Vercel
+The API seeds eight demo accounts and twelve posts into an empty database. Demo accounts share the `DEMO_PASSWORD` from `apps/api/.env`. Delete `apps/api/data/matchmint.db` to reseed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Logo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Ten concepts live at `/logos`. Set `ACTIVE_MARK` in `apps/web/src/components/Logo.tsx` to switch the one in use.
+
+## Photographs
+
+Images in `apps/web/public/img` are from Unsplash, used under the Unsplash licence.
